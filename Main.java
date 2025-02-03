@@ -7,7 +7,8 @@ class Main{
 		System.out.println("Enter Name: ");
 		String name = scan.nextLine();
 		System.out.println("Enter PRN: ");
-		long prn = long.parseLong(scan.nextLine());
+		long prn = Long.parseLong(scan.nextLine());
+		
 		StudentOperations operations = new StudentOperations();
 		Student student = new Student(name,prn);
 		operations.addStudent(student);
