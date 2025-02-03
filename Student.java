@@ -11,4 +11,12 @@ class Student{
 	public String getName(){
 		return name;
 	}
+	
+	public void setPRN(long prn){
+		this.prn = prn;
+	}
+	
+	public long getPRN(){
+		return prn;
+	}
 }
