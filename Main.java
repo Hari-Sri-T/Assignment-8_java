@@ -20,5 +20,7 @@ class Main{
 		Student student = new Student(name,prn,age,cgpa);
 		operations.addStudent(student);
 		operations.displayStudents();
+		
+		operations.searchStudent();
 	}
 }
