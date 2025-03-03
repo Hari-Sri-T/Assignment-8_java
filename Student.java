@@ -4,14 +4,13 @@ class Student{
 	private String name;
 	private long prn;
 	private int age;
-	private float cgpa;
+	private double cgpa;
 	
-	public Student(String name, long prn,int age,float cgpa){
+	public Student(String name, long prn,int age,double cgpa){
 		setName(name);
 		setPRN(prn);
 		setAGE(age);
 		setCGPA(cgpa);
-		
 	}
 	
 	public void setName(String name){
@@ -30,23 +29,23 @@ class Student{
 		return prn;
 	}
 	
-	public void setAGE(long age){
+	public void setAGE(int age){
 		this.age = age;
 	}
 	
-	public long getAGE(){
+	public int getAGE(){
 		return age;
 	}
 	
-	public void setCGPA(long cgpa){
+	public void setCGPA( double cgpa){
 		this.cgpa = cgpa;
 	}
 	
-	public long getCGPA(){
+	public double getCGPA(){
 		return cgpa;
 	}
 	
 	public void display(){
-		System.out.println("Name: " + getName()+ "\nPRN: " + getPRN() + "\nAge: " + getAGE() + "\nCGPA: " + getCGPA);
+		System.out.println("Name: " + getName()+ "\nPRN: " + getPRN() + "\nAge: " + getAGE() + "\nCGPA: " + getCGPA());
 }
 }
