@@ -24,5 +24,7 @@ class Main{
 		operations.searchStudent();
 		
 		operations.deleteStudent();
+		
+		operations.editStudent();
 	}
 }
