@@ -22,5 +22,7 @@ class Main{
 		operations.displayStudents();
 		
 		operations.searchStudent();
+		
+		operations.deleteStudent();
 	}
 }

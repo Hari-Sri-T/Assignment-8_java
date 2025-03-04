@@ -75,5 +75,22 @@ class StudentOperations{
             System.out.println("Invalid Position! No student exists at index " + pos);
         }
     }
+	
+	public void deleteStudent() {
+        Scanner scan = new Scanner(System.in);
+        System.out.println("Enter PRN to delete: ");
+        long prn = Long.parseLong(scan.nextLine());
+
+        Iterator<Student> iterator = students.iterator();
+        while (iterator.hasNext()) {
+            Student student = iterator.next();
+            if (student.getPRN() == prn) {
+                iterator.remove();
+                System.out.println("Student with PRN " + prn + " deleted.");
+                return;
+            }
+        }
+        System.out.println("Student with PRN " + prn + " not found.");
+    }
 }
 	
