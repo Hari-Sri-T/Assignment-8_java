@@ -1,4 +1,7 @@
 // Main.java
+// Name: Tanniru Hari Sri Shanmukha Sai
+// PRN: 23070126135
+// Batch: AIML B3
 
 import java.util.*;
 class Main{
