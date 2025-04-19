@@ -1,0 +1,63 @@
+public class InvalidNameException extends Exception {
+    public InvalidNameException(String msg) { super(msg); }
+}
+
+public class InvalidPRNException extends Exception {
+    public InvalidPRNException(String msg) { super(msg); }
+}
+
+public class InvalidAgeException extends Exception {
+    public InvalidAgeException(String msg) { super(msg); }
+}
+
+public class InvalidCGPAException extends Exception {
+    public InvalidCGPAException(String msg) { super(msg); }
+}
+
+public class DuplicatePRNException extends Exception {
+    public DuplicatePRNException(String msg) { super(msg); }
+}
+
+public class StudentNotFoundException extends Exception {
+    public StudentNotFoundException(String msg) { super(msg); }
+}
+
+public class EmptyStudentListException extends Exception {
+    public EmptyStudentListException(String msg) { super(msg); }
+}
+
+public class InvalidSearchChoiceException extends Exception {
+    public InvalidSearchChoiceException(String msg) { super(msg); }
+}
+
+public class InvalidPositionException extends Exception {
+    public InvalidPositionException(String msg) { super(msg); }
+}
+
+public class InvalidMenuChoiceException extends Exception {
+    public InvalidMenuChoiceException(String msg) { super(msg); }
+}
+
+public class NullStudentException extends Exception {
+    public NullStudentException(String msg) { super(msg); }
+}
+
+public class TooManyStudentsException extends Exception {
+    public TooManyStudentsException(String msg) { super(msg); }
+}
+
+public class EditNotAllowedException extends Exception {
+    public EditNotAllowedException(String msg) { super(msg); }
+}
+
+public class DeletionNotAllowedException extends Exception {
+    public DeletionNotAllowedException(String msg) { super(msg); }
+}
+
+public class EmptyNameException extends Exception {
+    public EmptyNameException(String msg) { super(msg); }
+}
+
+public class NegativeValueException extends Exception {
+    public NegativeValueException(String msg) { super(msg); }
+}

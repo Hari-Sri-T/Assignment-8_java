@@ -1,89 +1,79 @@
-//StudentOperations.java //Perform CRUD operations
+// StudentOperations.java
 import java.util.*;
-class StudentOperations{
-	ArrayList<Student> students; // <Student> refers to Student.java
-	
-	public StudentOperations(){ //constructor
-		this.students = new ArrayList<>();
-	}
-	
-	public void addStudent(Student student){ //Adding Student
-		students.add(student);
-		System.out.println("Student Added");
-	}
-	
-	public void displayStudents(){ // method to display the students
-		for (Student student : students){
-			
-			System.out.println("-----------------------------------------------------");
-			student.display();
-			System.out.println("-----------------------------------------------------");
-			System.out.println("\n");
-		}
-	}
-	
-	public void searchStudent(){ // method to search the students
+import customexceptions.*;
+
+public class StudentOperations {
+    private ArrayList<Student> students = new ArrayList<>();
+
+    public void addStudent(Student student) throws DuplicatePRNException, TooManyStudentsException, NullStudentException {
+        if (student == null) throw new NullStudentException("Cannot add a null student");
+        if (students.size() >= 100) throw new TooManyStudentsException("Cannot add more than 100 students");
+        for (Student s : students) {
+            if (s.getPrn() == student.getPrn()) {
+                throw new DuplicatePRNException("Student with this PRN already exists");
+            }
+        }
+        students.add(student);
+        System.out.println("Student Added Successfully.");
+    }
+
+    public void displayStudents() throws EmptyStudentListException {
+        if (students.isEmpty()) throw new EmptyStudentListException("No students to display.");
+        for (Student s : students) {
+            System.out.println("-----------------------------------------------------");
+            s.display();
+            System.out.println("-----------------------------------------------------\n");
+        }
+    }
+
+    public void searchStudent() throws EmptyStudentListException, InvalidSearchChoiceException, StudentNotFoundException, InvalidPositionException {
+        if (students.isEmpty()) throw new EmptyStudentListException("No students available to search.");
+
         Scanner scan = new Scanner(System.in);
         System.out.println("Search by:\n1. PRN\n2. Name\n3. Position");
         int choice = Integer.parseInt(scan.nextLine());
 
-        switch (choice) { // search by prn, name or position based on user input
+        switch (choice) {
             case 1:
-                System.out.println("\nEnter PRN to search: ");
+                System.out.println("Enter PRN to search:");
                 long prn = Long.parseLong(scan.nextLine());
-                searchByPrn(prn); //calls search by prn method
-                break;
+                for (Student s : students) {
+                    if (s.getPrn() == prn) {
+                        s.display();
+                        return;
+                    }
+                }
+                throw new StudentNotFoundException("Student with PRN not found.");
+
             case 2:
-                System.out.println("\nEnter Name to search: ");
+                System.out.println("Enter Name to search:");
                 String name = scan.nextLine();
-                searchByName(name); //calls search by name method
-                break;
+                for (Student s : students) {
+                    if (s.getName().equalsIgnoreCase(name)) {
+                        s.display();
+                        return;
+                    }
+                }
+                throw new StudentNotFoundException("Student with name not found.");
+
             case 3:
-                System.out.println("\nEnter Position (Index) to search: ");
+                System.out.println("Enter Position (Index) to search:");
                 int pos = Integer.parseInt(scan.nextLine());
-                searchByPosition(pos); //calls search by postion method
+                if (pos < 0 || pos >= students.size())
+                    throw new InvalidPositionException("Invalid index position");
+                students.get(pos).display();
                 break;
+
             default:
-                System.out.println("\nInvalid choice!");
+                throw new InvalidSearchChoiceException("Invalid search choice.");
         }
     }
-	
-	public void searchByPrn(long prn) { // checks all students prn's to find matching one
-        for (Student student : students) {
-            if (student.getPrn() == prn) {
-                System.out.println("\nStudent Found:");
-                student.display();
-                return;
-            }
-        }
-        System.out.println("\nStudent with PRN " + prn + " not found.");
-    }
-	
-	
-	public void searchByName(String name) { // checks all students names to find matching one 
-        for (Student student : students) {
-            if (student.getName().equalsIgnoreCase(name)) { // is not case sensitive
-                System.out.println("Student Found:");
-                student.display();
-                return;
-            }
-        }
-        System.out.println("Student with Name " + name + " not found.");
-    }
-	
-	public void searchByPosition(int pos) {
-        if (pos >= 0 && pos < students.size()) {//checks for positions 0 to the size of ArrayList
-            System.out.println("Student at Position " + pos + ":");
-            students.get(pos).display();
-        }
-		else {
-            System.out.println("Invalid Position! No student exists at index " + pos);
-        }
-    }
-	
-	public void deleteStudent() { //Delete by prn
+
+    public void deleteStudent() throws EmptyStudentListException, DeletionNotAllowedException, StudentNotFoundException {
+        if (students.isEmpty()) throw new EmptyStudentListException("No students available to delete.");
+
         Scanner scan = new Scanner(System.in);
-        System.out.println("Enter PRN to delete: ");
+        System.out.println("Enter PRN to delete:");
         long prn = Long.parseLong(scan.nextLine());
 
         Iterator<Student> iterator = students.iterator();
@@ -91,36 +81,36 @@ class StudentOperations{
             Student student = iterator.next();
             if (student.getPrn() == prn) {
                 iterator.remove();
-                System.out.println("Student with PRN " + prn + " deleted.");
+                System.out.println("Student deleted successfully.");
                 return;
             }
         }
-        System.out.println("Student with PRN " + prn + " not found.");
+        throw new StudentNotFoundException("Student not found with the given PRN.");
     }
-	
-	public void editStudent() { //edit students details based on prn
+
+    public void editStudent() throws EmptyStudentListException, EditNotAllowedException, StudentNotFoundException {
+        if (students.isEmpty()) throw new EmptyStudentListException("No students available to edit.");
+
         Scanner scan = new Scanner(System.in);
-        System.out.println("Enter PRN of the student to edit: ");
+        System.out.println("Enter PRN of student to edit:");
         long prn = Long.parseLong(scan.nextLine());
 
-        for (Student student : students) { //change everything except prn (editing it)
+        for (Student student : students) {
             if (student.getPrn() == prn) {
-                System.out.println("Student Found. Enter new details:");
-
-                System.out.println("Enter New Name: ");
-                student.setName(scan.nextLine());
-
-                System.out.println("Enter New Age: ");
-                student.setAge(Integer.parseInt(scan.nextLine()));
-
-                System.out.println("Enter New CGPA: ");
-                student.setCgpa(Double.parseDouble(scan.nextLine()));
-
-                System.out.println("Student details updated successfully!");
+                try {
+                    System.out.println("Enter New Name:");
+                    student.setName(scan.nextLine());
+                    System.out.println("Enter New Age:");
+                    student.setAge(Integer.parseInt(scan.nextLine()));
+                    System.out.println("Enter New CGPA:");
+                    student.setCgpa(Double.parseDouble(scan.nextLine()));
+                    System.out.println("Student details updated successfully!");
+                } catch (Exception e) {
+                    throw new EditNotAllowedException("Invalid details provided during edit.");
+                }
                 return;
             }
         }
-        System.out.println("Student with PRN " + prn + " not found.");
+        throw new StudentNotFoundException("Student not found with the given PRN.");
     }
 }
-	
