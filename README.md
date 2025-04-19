@@ -1,4 +1,4 @@
-# Student Management System
+# Student Management System (With Custom Exceptions)
 
 ##  Description
 This Java-based **Student Management System** allows users to **add, search, edit, delete, and display** student records using a **menu-driven program**.  
@@ -67,6 +67,57 @@ Contains the **main method**, displaying a menu-driven interface.
 | **4** | Delete a student (by PRN). |
 | **5** | Edit student details (by PRN). |
 | **6** | Exit the program. |
+
+---
+# Custom Exceptions for Student Management System
+
+## 1. **InvalidNameException**
+   - **Use**: Thrown when the student's name is invalid (e.g., contains non-letter characters).
+
+## 2. **InvalidPRNException**
+   - **Use**: Thrown when the PRN (Permanent Registration Number) is invalid (e.g., not 10 digits long).
+
+## 3. **InvalidAgeException**
+   - **Use**: Thrown when the student's age is outside the valid range (e.g., not between 16 and 100).
+
+## 4. **InvalidCGPAException**
+   - **Use**: Thrown when the student's CGPA is invalid (e.g., outside the range of 0 to 10).
+
+## 5. **DuplicatePRNException**
+   - **Use**: Thrown when attempting to add a student with a PRN that already exists in the system.
+
+## 6. **StudentNotFoundException**
+   - **Use**: Thrown when a student cannot be found by their PRN or name.
+
+## 7. **EmptyStudentListException**
+   - **Use**: Thrown when there are no students in the system to perform an operation (e.g., display or delete).
+
+## 8. **InvalidSearchChoiceException**
+   - **Use**: Thrown when an invalid choice is made during the student search operation.
+
+## 9. **InvalidPositionException**
+   - **Use**: Thrown when an invalid index position is provided for accessing a student's record.
+
+## 10. **InvalidMenuChoiceException**
+   - **Use**: Thrown when a user selects an invalid option from the menu.
+
+## 11. **NullStudentException**
+   - **Use**: Thrown when attempting to add a null student object to the system.
+
+## 12. **TooManyStudentsException**
+   - **Use**: Thrown when trying to add more than the allowed number of students (e.g., 100).
+
+## 13. **EditNotAllowedException**
+   - **Use**: Thrown when an edit operation is not allowed for a student’s details.
+
+## 14. **DeletionNotAllowedException**
+   - **Use**: Thrown when attempting to delete a student’s record when deletion is not permitted.
+
+## 15. **EmptyNameException**
+   - **Use**: Thrown when the student's name is empty or null.
+
+## 16. **NegativeValueException**
+   - **Use**: Thrown when a value (e.g., age, PRN, CGPA) is negative, which is invalid in the system.
 
 ---
 
